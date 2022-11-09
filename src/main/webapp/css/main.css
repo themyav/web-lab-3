@@ -1,0 +1,140 @@
+.container{
+    background-color: lightgray;
+    font-family: Fantasy, sans-serif;
+    font-size: 16px;
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.header{        /* селектор классов */
+    background: lavender;
+}
+
+
+
+img{
+    border-radius: 8px;
+}
+
+
+table{
+    table-layout: auto;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border: 0;
+    display: block;
+}
+th:first-child{
+    border-top-left-radius: 10px;
+}
+
+th:last-child{
+    border-top-right-radius: 10px;
+}
+tr{
+    background-color: white;
+
+}
+tr:nth-child(2) td{
+    background-color: lightyellow;
+}
+tr:hover{
+    background-color: lavender;
+}
+
+th{
+    color: darkblue;
+    background-color: lavender;
+    min-width: 50px;
+}
+
+fieldset{
+    border: 0;
+    margin: 8px;
+}
+
+
+input:focus,select:focus{
+    background-color: lavender;
+}
+
+input[type="button"], button{
+    background-color: dodgerblue;
+    border: 0;
+    border-radius: 8px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    width: 100px;
+    height: 30px;
+    margin: 5px;
+}
+
+#errorMessage{
+    font-weight: bold;
+    color: darkred;
+}
+
+button{
+    background-color: darkred;
+}
+
+input[type="button"]:hover{
+    background-color: lightskyblue;
+}
+
+
+button:hover{
+    background-color: indianred;
+}
+
+#OptionForm{
+    background-color: white;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 8px;
+    border: 0;
+}
+
+h2, h3{
+    color: darkblue;
+}
+
+h3{
+    margin-bottom: 3px;
+}
+
+.title{
+    color: black;
+}
+
+#checkbox > label{
+    margin: 0;
+}
+
+input[type="text"], select{
+    width: 80px;
+    height: 25px;
+    margin: 2px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: darkblue;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+label{
+    font-size: 18px;
+    color: darkblue;
+}
+label[for]{
+    display: inline-block;
+    float: left;
+    width: 180px;
+}
