@@ -19,13 +19,65 @@
 <h:body>
     <div class="container">
         <div class="header">
-            <h3>Лабораторная работа №3</h3>
-            <p class="title">Бернятцкая Кристина, P32081.<br>Вариант №576??.</br></p>
-            <p id="txt" class="title">time</p>
+            <p class="title">Бернятцкая Кристина, P32081. Вариант №231.</p>
+            <p id="txt" class="title"></p>
         </div>
-        <h:button id="goodbye_button">Вернуться на главную</h:button>
-    </div>
+        <div class="content">
+            <h2 id="header">Лабораторная работа №2</h2>
+            <!--<img src="resource/areas.png" id = "graph" alt="График">-->
 
+
+            <p>Введите значения X, Y и R, чтобы узнать, попадет ли точка в синюю область на графике.</p>
+            <p id="errorMessage"></p>
+            <form name="OptionForm" id="OptionForm" method="GET" action="">
+                <fieldset>
+                    <!-- x have to be checkbox-->
+                    <label>X ∈ <b>[-3, 5]</b></label>
+                    <div class="checkbox" id="checkbox">
+                        <label><input type="checkbox" class="radio" value="-3" name="X"/>-3</label>
+                        <label><input type="checkbox" class="radio" value="-2" name="X"/>-2</label>
+                        <label><input type="checkbox" class="radio" value="-1" name="X"/>-1</label>
+                        <label><input type="checkbox" class="radio" value="0" name="X"/>0</label>
+                        <label><input type="checkbox" class="radio" value="1" name="X"/>1</label>
+                        <label><input type="checkbox" class="radio" value="2" name="X"/>2</label>
+                        <label><input type="checkbox" class="radio" value="3" name="X"/>3</label>
+                        <label><input type="checkbox" class="radio" value="4" name="X"/>4</label>
+                        <label><input type="checkbox" class="radio" value="5" name="X"/>5</label>
+                    </div>
+                    <div class="labels">
+                        <label for="Y">Y ∈ <b>[-3, 3]</b></label>
+                        <input type="text" maxlength="10" class="number" id="Y" name="Y" value="-3"/>
+                        <label for="R">R ∈ <b>[1, 5]</b></label>
+                        <select id="R" name="R">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <input type="button" id="submit" value="Проверить"/>
+                </fieldset>
+            </form>
+            <h:form>
+                <h:commandButton action = "index" style="background-color: blueviolet" value = "Вернуться на главную" />
+            </h:form>
+            <div id="results">
+                <h3>Таблица результатов</h3>
+                <button id="cleanButton">Очистить</button>
+                <table id="respTable">
+                    <tr>
+                        <th id="testing">X</th>
+                        <th>Y</th>
+                        <th>R</th>
+                        <th>Результат</th>
+                        <th>Время работы скрипта</th>
+                        <th>Дата и время</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </h:body>
 
 </html>
