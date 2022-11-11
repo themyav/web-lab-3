@@ -1,16 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 <!--
   Created by IntelliJ IDEA.
   User: kristina
   Date: 2022-11-09
   Time: 23:03
 -->
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+>
 
 <h:head>
     <title>Лабораторная работа 3</title>
@@ -19,13 +21,14 @@
 <h:body>
     <div class="container">
         <div class="header">
-            <p class="title">Бернятцкая Кристина, P32081. Вариант №231.</p>
+            <p class="title">Бернятцкая Кристина, P32081. Вариант №576.</p>
             <p id="txt" class="title"></p>
         </div>
         <div class="content">
             <h2 id="header">Лабораторная работа №2</h2>
             <!--<img src="resource/areas.png" id = "graph" alt="График">-->
-
+            <canvas id="graph" height="200" width="200"></canvas>
+            <script src="js/drawer.js" />
 
             <p>Введите значения X, Y и R, чтобы узнать, попадет ли точка в синюю область на графике.</p>
             <p id="errorMessage"></p>
