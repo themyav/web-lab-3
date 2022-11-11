@@ -13,7 +13,7 @@ function draw(R=1) {
     let width = canvas.width; //consider as 4
     let height = canvas.height;
 
-    R = width * (R/4)
+    R = width * (R/5.5)
 
     if (!canvas.getContext) {
         return;
