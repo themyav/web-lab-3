@@ -34,7 +34,7 @@
             <p id="errorMessage"></p>
             <h:form name="OptionForm" id="OptionForm" method="GET" action="">
                 <h:outputLabel for="X">X ∈ [-5, 5]</h:outputLabel>
-                <h:inputText id = "X" required="true" requiredMessage="Введите значение X" /><br/>
+                <h:inputText id = "X" required="true" requiredMessage="Введите значение X" value="#{areaCheck.x}"/><br/>
                 <h:outputLabel for="Y">Y ∈ [-5, 3]</h:outputLabel>
                 <h:selectOneMenu id="Y" required="true" requiredMessage="Введите значение Y">
                     <f:selectItem itemValue="-5" itemLabel="-5"/>
@@ -55,8 +55,12 @@
                     <f:selectItem itemValue="2.5" itemLabel="2.5"/>
                     <f:selectItem itemValue="3" itemLabel="3"/>
                 </h:selectOneMenu><br/>
-                <h:commandButton action = "index" value = "Начать!" />
+                <h:commandButton value="Welcome Me">
+                    <f:ajax execute="X" render="output" />
+                </h:commandButton>
             </h:form>
+            <h:outputText id="output"
+                          value="#{areaCheck.checkArea}" />
             <h:form>
                 <h:commandButton action = "index" style="background-color: blueviolet" value = "Вернуться на главную" />
             </h:form>
