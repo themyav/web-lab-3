@@ -19,13 +19,16 @@ public class XValidator implements Validator {
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
+        if(o == null) setError();
+        else{
+            try{
+                X = Double.parseDouble(o.toString().replace(",", "."));
+            }
+            catch (NumberFormatException e){
+                setError();
+            }
+            if(X < -5 || X > 5) setError();
+        }
 
-        try{
-            X = Double.parseDouble(o.toString());
-        }
-        catch (NumberFormatException e){
-           setError();
-        }
-        if(X < -5 || X > 5) setError();
     }
 }

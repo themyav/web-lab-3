@@ -19,13 +19,16 @@ public class YValidator implements Validator {
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
+        if(o == null) setError();
+        else{
+            try{
+                Y = Double.parseDouble(o.toString());
+            }
+            catch (NumberFormatException e){
+                setError();
+            }
+            if(Y < -5 || Y > 3) setError();
+        }
 
-        try{
-            Y = Double.parseDouble(o.toString());
-        }
-        catch (NumberFormatException e){
-            setError();
-        }
-        if(Y < -5 || Y > 3) setError();
     }
 }

@@ -6,7 +6,7 @@
 
     <managed-bean>
         <managed-bean-name>areaCheck</managed-bean-name>
-        <managed-bean-class>managedBeans.AreaCheck</managed-bean-class>
+        <managed-bean-class>managedBeans.ResultController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 

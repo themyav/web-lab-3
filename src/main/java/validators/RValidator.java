@@ -19,13 +19,14 @@ public class RValidator implements Validator {
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-
-        try{
-            R = Double.parseDouble(o.toString());
+        if (o == null) setError();
+        else {
+            try {
+                R = Double.parseDouble(o.toString());
+            } catch (NumberFormatException e) {
+                setError();
+            }
+            if (R != 1 && R != 1.5 && R != 2 && R != 2.5 && R != 3) setError();
         }
-        catch (NumberFormatException e){
-            setError();
-        }
-        if(R != 1 && R != 1.5 && R != 2 && R != 2.5 && R != 3) setError();
     }
 }
