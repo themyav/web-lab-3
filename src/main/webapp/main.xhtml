@@ -11,6 +11,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsf/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 >
 
@@ -60,8 +61,9 @@
                     <f:selectItem itemValue="3" itemLabel="3"/>
                     <f:validator validatorId="rValidator" />
                 </h:selectOneMenu><br/>
-                <h:commandButton value="Welcome Me">
+                <h:commandButton value="Отправить">
                     <f:ajax execute="@form" render="output" />
+                    <f:ajax render="Results" />
                 </h:commandButton>
             </h:form>
             <h:outputText id="output"
@@ -72,16 +74,32 @@
             <div id="results">
                 <h3>Таблица результатов</h3>
                 <button id="cleanButton">Очистить</button>
-                <table id="respTable">
-                    <tr>
-                        <th id="testing">X</th>
-                        <th>Y</th>
-                        <th>R</th>
-                        <th>Результат</th>
-                        <th>Время работы скрипта</th>
-                        <th>Дата и время</th>
-                    </tr>
-                </table>
+                <h:dataTable id="Results" value="#{areaCheck.rows}" var="row">
+                    <h:column>
+                        <c:facet name="header">X</c:facet>
+                        #{row.x}
+                    </h:column>
+                    <h:column>
+                        <c:facet name="header">Y</c:facet>
+                        #{row.y}
+                    </h:column>
+                    <h:column>
+                        <c:facet name="header">R</c:facet>
+                        #{row.r}
+                    </h:column>
+                    <h:column>
+                        <c:facet name="header">Результат</c:facet>
+                        #{row.result}
+                    </h:column>
+                    <h:column>
+                        <c:facet name="header">Время выполнения</c:facet>
+                        #{row.time}
+                    </h:column>
+                    <h:column>
+                        <c:facet name="header">Дата</c:facet>
+                        #{row.date}
+                    </h:column>
+                </h:dataTable>
             </div>
         </div>
     </div>

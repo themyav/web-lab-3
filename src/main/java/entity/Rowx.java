@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "rowx")
 public class Rowx implements Serializable {
     @Id
     @GeneratedValue

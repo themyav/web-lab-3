@@ -6,7 +6,7 @@ function startTime() {
     m = checkTime(m);
     s = checkTime(s);
     document.getElementById('txt').innerHTML = "Текущее время: " + h + ":" + m + ":" + s;
-    setTimeout(startTime, 1000);
+    setTimeout(startTime, 12000);
 }
 
 function checkTime(i) {

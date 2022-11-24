@@ -8,6 +8,9 @@ import jakarta.persistence.Persistence;
 import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 @ManagedBean(name ="areaCheck")
@@ -16,6 +19,20 @@ public class ResultController implements Serializable{
     private String x;
     private String  y;
     private String r;
+
+    private RowDB connector;
+
+    private List<Rowx> rows;
+
+    public void createRow(Rowx row){
+        javax.persistence.EntityManagerFactory entityManagerFactory = javax.persistence.Persistence.createEntityManagerFactory("default");
+        javax.persistence.EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(row);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        entityManagerFactory.close();
+    }
 
 
     public String getCheckResult(){
@@ -34,14 +51,25 @@ public class ResultController implements Serializable{
         rowx.setTime((System.currentTimeMillis() - currentTime) / 1000.0);
         rowx.setDate(LocalDateTime.now().toString());
 
+        //connector = new RowDB();
+        //createRow(rowx);
+        //rows = getRows();
+        if(rows != null) rows.clear();
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(rowx);
         entityManager.getTransaction().commit();
+        rows = entityManager.createQuery("SELECT e FROM Rowx e").getResultList();
+        Collections.reverse(rows);
+        StringBuilder s = new StringBuilder();
+        for(Rowx rowx1 : rows){
+            s.append(rowx1.getX()).append(" ").append(rowx1.getY()).append("\n");
+        }
         entityManager.close();
         entityManagerFactory.close();
-        return Objects.equals(x, "1") ? "OKey " + x + " " + y + " " + r : "NOT OK" + x + " " + y + " " + r;
+        return "Data processed";
+        //return Objects.equals(x, "1") ? "OKey " + x + " " + y + " " + r : "NOT OK" + x + " " + y + " " + r;
     }
 
     public String getX() {
@@ -70,5 +98,9 @@ public class ResultController implements Serializable{
 
     public void setR(String r) {
         this.r = r;
+    }
+
+    public List<Rowx> getRows() {
+        return rows;
     }
 }
