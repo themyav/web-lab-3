@@ -17,13 +17,17 @@
 
 <h:head>
     <title>Лабораторная работа 3</title>
-    <link rel="stylesheet" href="css/main.css"></link>
+    <link rel="stylesheet" href="css/main.css"/>
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+    <script type="text/javascript" src="js/validator.js" />
+    <script src="js/eventHandler.js" />
 </h:head>
+
 <h:body>
     <div class="container">
         <div class="header">
             <p class="title">Бернятцкая Кристина, P32081. Вариант №576.</p>
-            <p id="txt" class="title"></p>
+            <p id="txt" class="title"/>
         </div>
         <div class="content">
             <h2 id="header">Лабораторная работа №2</h2>
@@ -52,8 +56,8 @@
                     <f:selectItem itemValue="3" itemLabel="3"/>
                     <f:validator validatorId="yValidator" />
                 </h:selectOneMenu><br/>
-                <h:outputLabel for="R">Y ∈ [1, 3]</h:outputLabel>
-                <h:selectOneMenu id="R" required="true" requiredMessage="Введите значение R" value="#{areaCheck.r}">
+                <h:outputLabel for="R">R ∈ [1, 3]</h:outputLabel>
+                <h:selectOneMenu id="R" required="true" requiredMessage="Введите значение R" value="#{areaCheck.r}" onchange="changeR(this)">
                     <f:selectItem itemValue="1" itemLabel="1"/>
                     <f:selectItem itemValue="1.5" itemLabel="1.5"/>
                     <f:selectItem itemValue="2" itemLabel="2"/>
