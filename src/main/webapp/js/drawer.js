@@ -13,12 +13,26 @@ function drawPoint(x, y, text, ctx, good=true){
 }
 
 function restorePoints(R){
+
+    //can simplify
+    let zero_x = document.getElementById('graph').offsetWidth / 2;
+    let zero_y = document.getElementById('graph').offsetHeight / 2;
+
     for(let i = 0; i < points.length; i++){
-        let x = points[i][0]
-        console.log(x)
-        let y = points[i][1]
-        let good = points[i][2]
-        drawPoint(x, y, '', ctx, good)
+        let x_pos = points[i][0]
+        let y_pos = points[i][1]
+        let oldR = points[i][2]
+        let good = points[i][3]
+
+        let y_cord = -1 * (y_pos - zero_y), x_cord = (x_pos - zero_x);
+
+        x_cord *= R/oldR
+        y_cord *= R/oldR
+
+        x_cord += zero_x
+        y_cord = -y_cord + zero_y
+
+        drawPoint(x_cord, y_cord, '', ctx, good)
     }
 
 }
@@ -82,7 +96,7 @@ function draw(R=1) {
     drawPoint(width / 2 - R, height/ 2, '-R', ctx);
     drawPoint(width / 2 - R / 2, height/ 2, '-R/2', ctx);
 
-    restorePoints(R)
+    restorePoints(R * SCALE/width)
 
 
 }
