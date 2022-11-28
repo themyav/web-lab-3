@@ -1,5 +1,8 @@
 var ctx, canvas;
-
+let points = []
+const SCALE = 6.1
+//нужен массив точек, которые будут перерисовываться в зависимости от размера...
+//рисуем в соответвии с радиусом??
 function drawPoint(x, y, text, ctx, good=true){
     if(good) ctx.fillStyle= 'green';
     else ctx.fillStyle = 'red'
@@ -7,13 +10,15 @@ function drawPoint(x, y, text, ctx, good=true){
     ctx.arc(x, y, 2, 0, 2 * Math.PI, true);
     ctx.fill();
     ctx.fillText(text, x + 3, y - 6);
+    points.push([x, y])
 }
 function draw(R=1) {
     canvas = document.querySelector('#graph');
-    let width = canvas.width; //consider as 4
+    let width = canvas.width; //consider as 6.1?
     let height = canvas.height;
 
-    R = width * (R/6.1)
+    //recalculation of R
+    R = width * (R/SCALE)
 
     if (!canvas.getContext) {
         return;

@@ -35,13 +35,28 @@ $(document).ready(function () {
 
     $('#graph').on('click', function (e) {
 
+        canvas = document.querySelector('#graph');
+        let width = canvas.width;
+        let height = canvas.height;
+
         let x_pos = e.pageX - document.getElementById('graph').offsetLeft;
         let y_pos = e.pageY - document.getElementById('graph').offsetTop;
         let zero_x = document.getElementById('graph').offsetWidth / 2;
         let zero_y = document.getElementById('graph').offsetHeight / 2;
 
-        let y_cord = -1 * (y_pos - zero_y), x_cord = (x_pos - zero_x)
-        if (checkValue(R, 1, 5, 1)) {
+        let y_cord = -1 * (y_pos - zero_y), x_cord = (x_pos - zero_x);
+        console.log(y_cord, x_cord, R);
+        x_cord = x_cord/width * SCALE
+        y_cord = y_cord/height * SCALE
+
+        let x_val = x_cord.toFixed(4).toString();
+        let y_val = Math.min(Math.max(Math.round(y_cord.toFixed(4)).toString(), -5), 3);
+
+        $('#X').value = x_val;
+        $('#X').text(x_val);
+        $('#output').text(x_val);
+        //console.log(x_val, y_val);
+        /*if (checkValue(R, 1, 5, 1)) {
             let w = R / 0.8;
             let k = w / zero_x;
             x_cord *= k;
@@ -68,7 +83,7 @@ $(document).ready(function () {
             }
         } else {
             document.getElementById('errorMessage').innerText = 'Введите корректный R!';
-        }
+        }*/
     });
 });
 
