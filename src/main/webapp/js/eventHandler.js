@@ -57,8 +57,9 @@ $(document).ready(function () {
         points.push([x_pos, y_pos, R, true])
 
 
-        $('#X').value = x_val;
-        $('#X').text(x_val);
+        $('#OptionForm\\:X').val(x_val);
+        $('#OptionForm\\:Y').val(y_val);
+        //$('#X').text(x_val);
         $('#output').text(x_val);
         //console.log(x_val, y_val);
         /*if (checkValue(R, 1, 5, 1)) {
