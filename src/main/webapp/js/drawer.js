@@ -10,7 +10,17 @@ function drawPoint(x, y, text, ctx, good=true){
     ctx.arc(x, y, 2, 0, 2 * Math.PI, true);
     ctx.fill();
     ctx.fillText(text, x + 3, y - 6);
-    points.push([x, y])
+}
+
+function restorePoints(R){
+    for(let i = 0; i < points.length; i++){
+        let x = points[i][0]
+        console.log(x)
+        let y = points[i][1]
+        let good = points[i][2]
+        drawPoint(x, y, '', ctx, good)
+    }
+
 }
 function draw(R=1) {
     canvas = document.querySelector('#graph');
@@ -50,17 +60,6 @@ function draw(R=1) {
     ctx.lineTo(width / 2, height / 2 + R);
     ctx.fill();
 
-    /*ctx.beginPath();
-    ctx.moveTo(width / 2 + R, height / 2);
-    ctx.lineTo(width / 2, height / 2);
-    ctx.lineTo(width / 2, height / 2 - R);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(width / 2, height / 2, R, 0,
-        -Math.PI / 2, true);
-    ctx.fill();*/
-
-
     ctx.strokeStyle = 'black';
     ctx.lineWidth = 1.1;
 
@@ -82,6 +81,8 @@ function draw(R=1) {
     drawPoint(width / 2 + R / 2, height/ 2, 'R/2', ctx);
     drawPoint(width / 2 - R, height/ 2, '-R', ctx);
     drawPoint(width / 2 - R / 2, height/ 2, '-R/2', ctx);
+
+    restorePoints(R)
 
 
 }

@@ -52,6 +52,10 @@ $(document).ready(function () {
         let x_val = x_cord.toFixed(4).toString();
         let y_val = Math.min(Math.max(Math.round(y_cord.toFixed(4)).toString(), -5), 3);
 
+        drawPoint(x_pos, y_pos, '', ctx);
+        points.push([x_pos, y_pos, true])
+
+
         $('#X').value = x_val;
         $('#X').text(x_val);
         $('#output').text(x_val);
