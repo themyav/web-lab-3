@@ -39,7 +39,7 @@
             <p id="errorMessage"></p>
             <h:form name="OptionForm" id="OptionForm" method="GET" action="">
                 <h:outputLabel for="X">X ∈ [-5, 5]</h:outputLabel>
-                <h:inputText id = "X" required="true" requiredMessage="Введите значение X" value="#{areaCheck.x}">
+                <h:inputText id = "X" required="true" requiredMessage="Введите значение X" value="#{areaCheck.x}" onchange="changeX(this)">
                     <f:validator validatorId="xValidator" />
                 </h:inputText>
                 <br/>
@@ -65,19 +65,21 @@
                     <f:selectItem itemValue="3" itemLabel="3"/>
                     <f:validator validatorId="rValidator" />
                 </h:selectOneMenu><br/>
-                <h:commandButton value="Отправить">
+                <h:commandButton value="Отправить" id="sendButton">
                     <f:ajax execute="@form" render="output" />
                     <f:ajax render="Results" />
                 </h:commandButton>
             </h:form>
             <h:outputText id="output"
-                          value="#{areaCheck.checkResult}" />
+                          value="#{areaCheck.getProcess(1)}" />
             <h:form>
                 <h:commandButton action = "index" style="background-color: blueviolet" value = "Вернуться на главную" />
             </h:form>
             <div id="results">
                 <h3>Таблица результатов</h3>
-                <button id="cleanButton">Очистить</button>
+                <h:commandButton value="Очистить" id="cleanButton" type="submit" action="#{areaCheck.getProcess(0)}">
+                    <f:ajax render="Results" />
+                </h:commandButton>
                 <h:dataTable id="Results" value="#{areaCheck.rows}" var="row">
                     <h:column>
                         <c:facet name="header">X</c:facet>

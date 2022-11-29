@@ -5,6 +5,20 @@ function changeR(val){
     draw(R)
 }
 
+function checkValue(value, min, max, positive) {
+    value = value.replace(",", ".");
+    let ok = (value.search(/^-?\d.?\d{0,5}$/) !== -1 && Number(value) >= min && Number(value) <= max);
+    if (positive && value.search("-") !== -1) ok = false;
+    return ok;
+}
+
+function changeX(val){
+    if(!checkValue(val.value, -5, 5, false)){
+        console.log("bad");
+        $('#OptionForm\\:sendButton').disabled = true;
+    }
+}
+
 $(document).ready(function () {
 
     /*$('#submit').click(function () {
@@ -50,17 +64,27 @@ $(document).ready(function () {
         x_cord = x_cord/width * SCALE
         y_cord = y_cord/height * SCALE
 
-        let x_val = x_cord.toFixed(4).toString();
-        let y_val = Math.min(Math.max(Math.round(y_cord.toFixed(4)).toString(), -5), 3);
+        const y_min = -5, y_max = 3, fraction = 4
+        let x_val = x_cord.toFixed(fraction).toString();
+        let y_val = y_cord.toFixed(fraction);
+        console.log("before cast to int", y_val);
 
-        drawPoint(x_pos, y_pos, '', ctx);
+        //fix is possible
+        if(y_val > y_max) y_val = Math.ceil(y_val);
+        else if(y_val < y_min) y_val = Math.floor(y_val);
+        else y_val = Math.round(y_val);
+
+        console.log("after cast to int", y_val);
+
+        y_val = Math.min(Math.max(y_val.toString(), y_min), y_max);
         points.push([x_pos, y_pos, R, true])
 
 
         $('#OptionForm\\:X').val(x_val);
         $('#OptionForm\\:Y').val(y_val);
-        //$('#X').text(x_val);
-        $('#output').text(x_val);
+        $('#OptionForm\\:sendButton').click()
+        drawPoint(x_pos, y_pos, '', ctx); //брать значение ячейки таблицы..
+        //$('#output').text(x_val);
         //console.log(x_val, y_val);
         /*if (checkValue(R, 1, 5, 1)) {
             let w = R / 0.8;

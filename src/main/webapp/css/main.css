@@ -1,4 +1,4 @@
-container{
+.container{
     background-color: lightgray;
     font-family: Helvetica, sans-serif;
     font-size: 16px;
@@ -11,8 +11,6 @@ container{
 .header{
     background: lavender;
 }
-
-
 
 img{
     border-radius: 8px;

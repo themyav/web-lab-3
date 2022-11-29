@@ -8,37 +8,27 @@ import jakarta.persistence.Persistence;
 import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+
 
 @ManagedBean(name ="areaCheck")
 public class ResultController implements Serializable{
     private static final long serialVersionUID = 1L;
+    private static final int DELETE = 0;
+    private static final int CREATE = 1;
+
+    private EntityManager entityManager;
     private String x;
     private String  y;
     private String r;
-
-    private RowDB connector;
-
+    
     private List<Rowx> rows;
 
-    public void createRow(Rowx row){
-        javax.persistence.EntityManagerFactory entityManagerFactory = javax.persistence.Persistence.createEntityManagerFactory("default");
-        javax.persistence.EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.persist(row);
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        entityManagerFactory.close();
-    }
-
-
-    public String getCheckResult(){
-        Rowx rowx = new Rowx(); //создаем новую строку
-        if(x == null || y == null || r == null) return "Start";
-        double X = Double.parseDouble(x); //replace , .
+    Rowx createRow(){
+        Rowx rowx = new Rowx();
+        if(x == null || y == null || r == null) return null;
+        double X = Double.parseDouble(x);
         double Y = Double.parseDouble(y);
         double R = Double.parseDouble(r);
 
@@ -50,26 +40,52 @@ public class ResultController implements Serializable{
         rowx.setResult(rowx.isInArea(X, Y, R));
         rowx.setTime((System.currentTimeMillis() - currentTime) / 1000.0);
         rowx.setDate(LocalDateTime.now().toString());
+        return rowx;
+    }
 
-        //connector = new RowDB();
-        //createRow(rowx);
-        //rows = getRows();
-        if(rows != null) rows.clear();
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+    public void addRow(Rowx row){
         entityManager.getTransaction().begin();
-        entityManager.persist(rowx);
+        entityManager.persist(row);
         entityManager.getTransaction().commit();
+    }
+
+    public void deleteRows(){
+        if(rows != null) {
+            entityManager.getTransaction().begin();
+            for(Rowx r: rows){
+                entityManager.remove(entityManager.find(Rowx.class, r.getId()));
+            }
+            entityManager.getTransaction().commit();
+
+            rows.clear();
+        }
+    }
+
+    private void initRows(){
+        if(rows != null) rows.clear();
         rows = entityManager.createQuery("SELECT e FROM Rowx e").getResultList();
         Collections.reverse(rows);
-        StringBuilder s = new StringBuilder();
-        for(Rowx rowx1 : rows){
-            s.append(rowx1.getX()).append(" ").append(rowx1.getY()).append("\n");
+
+    }
+
+    public String getProcess(int code){
+
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
+        entityManager = entityManagerFactory.createEntityManager();
+
+        if(code == DELETE) {
+            deleteRows();
+            return "Таблица очищена";
+        }
+        else if(code == CREATE){
+            Rowx rowx = createRow();
+            if(rowx != null) addRow(rowx);
+            initRows();
+            return "Результат обработан";
         }
         entityManager.close();
         entityManagerFactory.close();
-        return "Data processed";
-        //return Objects.equals(x, "1") ? "OKey " + x + " " + y + " " + r : "NOT OK" + x + " " + y + " " + r;
+        return "Некорректный запрос";
     }
 
     public String getX() {
