@@ -1,11 +1,11 @@
 package managedBeans;
 
 import entity.Rowx;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 import javax.faces.bean.ManagedBean;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -77,7 +77,7 @@ public class ResultController implements Serializable{
 
     public String getProcess(int code){
 
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("database");
         entityManager = entityManagerFactory.createEntityManager();
 
         if(code == DELETE) {
