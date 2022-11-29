@@ -65,14 +65,15 @@
                     <f:selectItem itemValue="3" itemLabel="3"/>
                     <f:validator validatorId="rValidator" />
                 </h:selectOneMenu><br/>
-                <h:commandButton value="Отправить" id="sendButton">
+                <h:commandButton value="Отправить" id="sendButton" widgetVar="myButton">
                     <f:ajax execute="@form" render="output" />
                     <f:ajax render="Results" />
-                </h:commandButton>
+                </h:commandButton><br/>
+                <h:outputText id="output"
+                              value="#{areaCheck.getProcess(1)}" />
+                <h:form>
             </h:form>
-            <h:outputText id="output"
-                          value="#{areaCheck.getProcess(1)}" />
-            <h:form>
+
                 <h:commandButton action = "index" style="background-color: blueviolet" value = "Вернуться на главную" />
             </h:form>
             <div id="results">

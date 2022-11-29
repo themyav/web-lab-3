@@ -8,7 +8,10 @@ import jakarta.persistence.Persistence;
 import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -39,7 +42,8 @@ public class ResultController implements Serializable{
         long currentTime = System.currentTimeMillis();
         rowx.setResult(rowx.isInArea(X, Y, R));
         rowx.setTime((System.currentTimeMillis() - currentTime) / 1000.0);
-        rowx.setDate(LocalDateTime.now().toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        rowx.setDate(LocalDateTime.now().format(formatter));
         return rowx;
     }
 
@@ -64,6 +68,7 @@ public class ResultController implements Serializable{
     private void initRows(){
         if(rows != null) rows.clear();
         rows = entityManager.createQuery("SELECT e FROM Rowx e").getResultList();
+        rows.sort(Comparator.comparing(Rowx::getDate));
         Collections.reverse(rows);
 
     }
@@ -81,7 +86,7 @@ public class ResultController implements Serializable{
             Rowx rowx = createRow();
             if(rowx != null) addRow(rowx);
             initRows();
-            return "Результат обработан";
+            return rowx != null && rowx.getResult()  ? "OK" : "FAILED";
         }
         entityManager.close();
         entityManagerFactory.close();

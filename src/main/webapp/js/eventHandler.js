@@ -6,6 +6,7 @@ function changeR(val){
 }
 
 function checkValue(value, min, max, positive) {
+    console.log(value, min, max);
     value = value.replace(",", ".");
     let ok = (value.search(/^-?\d.?\d{0,5}$/) !== -1 && Number(value) >= min && Number(value) <= max);
     if (positive && value.search("-") !== -1) ok = false;
@@ -15,7 +16,14 @@ function checkValue(value, min, max, positive) {
 function changeX(val){
     if(!checkValue(val.value, -5, 5, false)){
         console.log("bad");
-        $('#OptionForm\\:sendButton').disabled = true;
+        document.getElementById("OptionForm:sendButton").disabled = "disabled";
+        document.getElementById("OptionForm:output").innerHTML = "Некорректное значение X!";
+        //$('#OptionForm\\:sendButton').disabled = true;
+    }
+    else {
+        document.getElementById("OptionForm:sendButton").removeAttribute("disabled");
+        document.getElementById("OptionForm:output").innerHTML = '';
+
     }
 }
 
@@ -83,7 +91,13 @@ $(document).ready(function () {
         $('#OptionForm\\:X').val(x_val);
         $('#OptionForm\\:Y').val(y_val);
         $('#OptionForm\\:sendButton').click()
-        drawPoint(x_pos, y_pos, '', ctx); //брать значение ячейки таблицы..
+        setTimeout(()=>{
+            let hint = document.getElementById("OptionForm:output").innerHTML;
+            let good = (hint === "OK");
+            console.log(good, hint);
+            drawPoint(x_pos, y_pos, '', ctx, good); //брать значение ячейки таблицы..
+        }, 100);
+
         //$('#output').text(x_val);
         //console.log(x_val, y_val);
         /*if (checkValue(R, 1, 5, 1)) {

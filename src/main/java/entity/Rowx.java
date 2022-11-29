@@ -70,6 +70,10 @@ public class Rowx implements Serializable {
         this.result = result;
     }
 
+    public boolean getResult(){
+        return this.result;
+    }
+
     public String getDate() {
         return date;
     }
