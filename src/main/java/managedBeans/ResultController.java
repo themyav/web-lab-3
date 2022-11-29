@@ -31,6 +31,8 @@ public class ResultController implements Serializable{
     Rowx createRow(){
         Rowx rowx = new Rowx();
         if(x == null || y == null || r == null) return null;
+        x = x.replace(',', '.');
+        //x = "3";
         double X = Double.parseDouble(x);
         double Y = Double.parseDouble(y);
         double R = Double.parseDouble(r);
