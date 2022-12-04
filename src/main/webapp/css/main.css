@@ -38,7 +38,7 @@ tr{
     background-color: white;
 
 }
-tr:nth-child(2) td{
+tr:nth-child(1) td{
     background-color: lightyellow;
 }
 tr:hover{
@@ -135,4 +135,35 @@ label[for]{
     display: inline-block;
     float: left;
     width: 180px;
+}
+
+input[type="submit"]{
+    background-color: dodgerblue;
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 15px;
+    color: aliceblue;
+    border-radius: 10px;
+}
+input[id*="backButton"]{
+    background-color: saddlebrown;
+    vertical-align: middle;
+    margin-top: 10px;
+}
+
+input[type="submit"]:hover{
+    background-color: lightblue;
+
+}
+
+input[id*="backButton"]:hover{
+    background-color: rosybrown;
+
+}
+
+div#goBack{
+    background-color: lightblue;
+    min-height: 50px;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 0 0 9px 9px;
 }

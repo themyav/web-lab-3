@@ -8,7 +8,7 @@ function changeR(val){
 function checkValue(value, min, max, positive) {
     console.log(value, min, max);
     value = value.replace(",", ".");
-    let ok = (value.search(/^-?\d.,?\d{0,5}$/) !== -1 && Number(value) >= min && Number(value) <= max);
+    let ok = (value.search(/^-?\d[.,]?\d{0,5}$/) !== -1 && Number(value) >= min && Number(value) <= max);
     if (positive && value.search("-") !== -1) ok = false;
     return ok;
 }

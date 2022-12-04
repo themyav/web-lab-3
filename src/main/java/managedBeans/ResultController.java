@@ -29,6 +29,7 @@ public class ResultController implements Serializable{
     private List<Rowx> rows;
 
     Rowx createRow(){
+        double currentTime = System.nanoTime();
         Rowx rowx = new Rowx();
         if(x == null || y == null || r == null) return null;
         x = x.replace(',', '.');
@@ -41,9 +42,8 @@ public class ResultController implements Serializable{
         rowx.setY(Y);
         rowx.setR(R);
 
-        long currentTime = System.currentTimeMillis();
         rowx.setResult(rowx.isInArea(X, Y, R));
-        rowx.setTime((System.currentTimeMillis() - currentTime) / 1000.0);
+        rowx.setTime((System.nanoTime() - currentTime) / 1e6);//((currentTime == System.currentTimeMillis() ? 0.1 : 0.2)); //(currentTime - System.currentTimeMillis()) * 1e6);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         rowx.setDate(LocalDateTime.now().format(formatter));
         return rowx;

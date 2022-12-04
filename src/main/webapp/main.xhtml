@@ -70,11 +70,10 @@
                     <f:ajax render="Results" />
                 </h:commandButton><br/>
                 <h:outputText id="output"
-                              value="#{areaCheck.getProcess(1)}" />
-                <h:form>
-            </h:form>
-
-                <h:commandButton action = "index" style="background-color: blueviolet" value = "Вернуться на главную" />
+                              value="#{areaCheck.getProcess(1)}" /><br/>
+                <div id="goBack">
+                    <h:commandButton id="backButton" action = "index" value = "Вернуться на главную" />
+                </div>
             </h:form>
             <div id="results">
                 <h3>Таблица результатов</h3>
@@ -99,7 +98,7 @@
                         #{row.result}
                     </h:column>
                     <h:column>
-                        <c:facet name="header">Время выполнения</c:facet>
+                        <c:facet name="header">Время выполнения, мс</c:facet>
                         #{row.time}
                     </h:column>
                     <h:column>
