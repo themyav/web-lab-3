@@ -18,7 +18,6 @@ function changeX(val){
         console.log("bad");
         document.getElementById("OptionForm:sendButton").disabled = "disabled";
         document.getElementById("OptionForm:output").innerHTML = "Некорректное значение X!";
-        //$('#OptionForm\\:sendButton').disabled = true;
     }
     else {
         document.getElementById("OptionForm:sendButton").removeAttribute("disabled");
@@ -37,30 +36,6 @@ $(document).ready(function () {
         restoreCanvas(R, false);
         console.log("clean all");
     });
-
-    /*$('#submit').click(function () {
-        sendAreaCheckRequest(false);
-    });
-
-    $('#cleanButton').click(function () {
-        sendCleanRequest();
-    });
-
-
-
-    $("input:checkbox").on('click', function () {
-        let $box = $(this);
-        if ($box.is(":checked")) {
-            let group = "input:checkbox[name='" + $box.attr("name") + "']";
-            console.log(group);
-            $(group).prop("checked", false);
-            $box.prop("checked", true);
-        } else {
-            $box.prop("checked", false);
-        }
-    });*/
-
-
 
     $('#graph').on('click', function (e) {
 
@@ -104,50 +79,12 @@ $(document).ready(function () {
         //else if point valid
 
         //draw with non-rounded cords
-        let good = areaCheck(x_cord, y_cord, R);
+        let good = areaCheck(x_val, y_val, R);
         points.push([x_pos, y_pos, R, good])
         $('#OptionForm\\:X').val(x_val);
         $('#OptionForm\\:Y').val(y_val);
         $('#OptionForm\\:sendButton').click()
-        drawPoint(x_pos, y_pos, '', ctx, good); //брать значение ячейки таблицы..
-
-        /*setTimeout(()=>{
-            let hint = document.getElementById("OptionForm:output").innerHTML;
-            let good = (hint === "OK");
-            console.log(good, hint);
-            drawPoint(x_pos, y_pos, '', ctx, good); //брать значение ячейки таблицы..
-        }, 100);*/
-
-        //$('#output').text(x_val);
-        //console.log(x_val, y_val);
-        /*if (checkValue(R, 1, 5, 1)) {
-            let w = R / 0.8;
-            let k = w / zero_x;
-            x_cord *= k;
-            y_cord *= k;
-            document.getElementById('errorMessage').innerText = '';
-
-            let x_val = Math.min(Math.max(Math.round(x_cord.toFixed(4)).toString(), -3), 3);
-            let new_element = "input:checkbox[value=" + x_val.toString() + "]"
-            let old_element = "input:checkbox[name='X']:checked";
-
-            $(old_element).prop("checked", false);
-            $(new_element).prop("checked", true);
-
-            document.getElementById('Y').value = y_cord.toFixed(4).toString();
-
-            let X = $("input:checkbox[name='X']:checked").val();
-            let Y = $("#Y").val();
-            if (X == null || Y == null || !checkValue(X, -5, 3, 0) || !checkValue(Y, -3, 5, 0)) {
-                document.getElementById('errorMessage').innerText = 'Значение X или Y в данной точке не корректно!';
-            } else {
-                restoreCanvas();
-                drawPoint(x_pos, y_pos, '', ctx);
-                document.getElementById('errorMessage').innerText = '';
-            }
-        } else {
-            document.getElementById('errorMessage').innerText = 'Введите корректный R!';
-        }*/
+        drawPoint(x_pos, y_pos, '', ctx, good);
     });
 });
 
