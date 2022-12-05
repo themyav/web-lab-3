@@ -33,6 +33,11 @@ $(document).ready(function () {
         this.value = this.value.replace(/[^0-9.,\-]/g, '');
     });
 
+    $('#cleanButton').click(function () {
+        restoreCanvas(R, false);
+        console.log("clean all");
+    });
+
     /*$('#submit').click(function () {
         sendAreaCheckRequest(false);
     });

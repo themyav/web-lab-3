@@ -2,6 +2,7 @@ package managedBeans;
 
 import entity.Rowx;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,6 +17,7 @@ import java.util.List;
 
 
 @ManagedBean(name ="areaCheck")
+@ApplicationScoped
 public class ResultController implements Serializable{
     private static final long serialVersionUID = 1L;
     private static final int DELETE = 0;
@@ -88,7 +90,8 @@ public class ResultController implements Serializable{
             Rowx rowx = createRow();
             if(rowx != null) addRow(rowx);
             initRows();
-            return rowx != null && rowx.getResult()  ? "OK" : "FAILED";
+            if(rowx == null) return "";
+            else return rowx.getResult()  ? "Попадание" : "Промах";
         }
         entityManager.close();
         entityManagerFactory.close();

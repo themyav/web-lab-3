@@ -57,7 +57,7 @@ function restorePoints(R){
     }
 
 }
-function draw(R=1) {
+function draw(R=1, withPoints=true) {
     canvas = document.querySelector('#graph');
     let width = canvas.width; //consider as 6.1?
     let height = canvas.height;
@@ -117,13 +117,13 @@ function draw(R=1) {
     drawPoint(width / 2 - R, height/ 2, '-R', ctx);
     drawPoint(width / 2 - R / 2, height/ 2, '-R/2', ctx);
 
-    restorePoints(R * SCALE/width)
+    if(withPoints) restorePoints(R * SCALE/width)
 
 
 }
 
-function restoreCanvas(){
+function restoreCanvas(R=1, withPoints=true){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    draw();
+    draw(R, withPoints);
 }
 draw();
