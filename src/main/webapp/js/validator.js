@@ -1,3 +1,7 @@
+const y_min = -5, y_max = 3;
+const x_min = -5, x_max = 5;
+fraction = 4;
+
 function startTime() {
     const today = new Date();
     let h = today.getHours();

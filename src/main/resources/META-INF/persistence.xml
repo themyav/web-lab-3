@@ -5,8 +5,8 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entity.Rowx</class>
     <properties>
-      <property name="eclipselink.ddl-generation" value="create-tables" />
-      <!--<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://pg/studs"/>
+      <!--<property name="eclipselink.ddl-generation" value="create-tables" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://pg/studs"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.user" value="s335051"/>-->
 

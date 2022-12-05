@@ -3,6 +3,19 @@ let points = []
 const SCALE = 6.1
 //нужен массив точек, которые будут перерисовываться в зависимости от размера...
 //рисуем в соответвии с радиусом??
+
+function areaCheck(x, y, R){
+    if(x >= 0 && y >= 0){
+        return x <= R && y <= R;
+    }
+    else if(x <= 0 && y >= 0){
+        return x*x + y*y <= R*R/4;
+    }
+    else if(x <= 0 && y <= 0){
+        return y >= -2*x - R;
+    }
+    else return false;
+}
 function drawPoint(x, y, text, ctx, good=true){
     if(good) ctx.fillStyle= 'green';
     else ctx.fillStyle = 'red'
@@ -17,22 +30,30 @@ function restorePoints(R){
     //can simplify
     let zero_x = document.getElementById('graph').offsetWidth / 2;
     let zero_y = document.getElementById('graph').offsetHeight / 2;
+    let width = canvas.width;
+    let height = canvas.height;
 
     for(let i = 0; i < points.length; i++){
         let x_pos = points[i][0]
         let y_pos = points[i][1]
         let oldR = points[i][2]
-        let good = points[i][3]
 
-        let y_cord = -1 * (y_pos - zero_y), x_cord = (x_pos - zero_x);
 
-        x_cord *= R/oldR
-        y_cord *= R/oldR
+       let y_cord = -1 * (y_pos - zero_y), x_cord = (x_pos - zero_x);
 
-        x_cord += zero_x
-        y_cord = -y_cord + zero_y
+        x_cord = x_cord/width * SCALE;
+        y_cord = y_cord/height * SCALE;
 
-        drawPoint(x_cord, y_cord, '', ctx, good)
+        let good = areaCheck(x_cord, y_cord, R)
+        //console.log(x_cord, y_cord, R, good)
+
+        //x_cord *= R/oldR
+        //y_cord *= R/oldR
+
+        //x_cord += zero_x
+        //y_cord = -y_cord + zero_y
+
+        drawPoint(x_pos, y_pos, '', ctx, good)
     }
 
 }

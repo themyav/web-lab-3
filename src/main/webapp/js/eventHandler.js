@@ -71,34 +71,47 @@ $(document).ready(function () {
 
         let y_cord = -1 * (y_pos - zero_y), x_cord = (x_pos - zero_x);
         console.log("you put point in ", x_cord, y_cord, R);
-        x_cord = x_cord/width * SCALE
-        y_cord = y_cord/height * SCALE
 
-        const y_min = -5, y_max = 3, fraction = 4
+        //non-rounded coordinates
+        x_cord = x_cord/width * SCALE;
+        y_cord = y_cord/height * SCALE;
+
+        //round coordinates
         let x_val = x_cord.toFixed(fraction).toString();
         let y_val = y_cord.toFixed(fraction);
         console.log("before cast to int", y_val);
 
-        //fix is possible
+        //3.1 -> 4, -5.1 -> -6
         if(y_val > y_max) y_val = Math.ceil(y_val);
         else if(y_val < y_min) y_val = Math.floor(y_val);
         else y_val = Math.round(y_val);
 
         console.log("after cast to int", y_val);
 
-        y_val = Math.min(Math.max(y_val.toString(), y_min), y_max);
-        points.push([x_pos, y_pos, R, true])
+        //check if point invalid
+        if(!(checkValue(x_val.toString(), x_min, x_max, false) && checkValue(y_val.toString(), y_min, y_max, false))){
+            console.log("you clicked to invalid point");
+            return;
+        }
 
+        //y_val = Math.min(Math.max(y_val.toString(), y_min), y_max);
 
+        //else if point valid
+
+        //draw with non-rounded cords
+        let good = areaCheck(x_cord, y_cord, R);
+        points.push([x_pos, y_pos, R, good])
         $('#OptionForm\\:X').val(x_val);
         $('#OptionForm\\:Y').val(y_val);
         $('#OptionForm\\:sendButton').click()
-        setTimeout(()=>{
+        drawPoint(x_pos, y_pos, '', ctx, good); //брать значение ячейки таблицы..
+
+        /*setTimeout(()=>{
             let hint = document.getElementById("OptionForm:output").innerHTML;
             let good = (hint === "OK");
             console.log(good, hint);
             drawPoint(x_pos, y_pos, '', ctx, good); //брать значение ячейки таблицы..
-        }, 100);
+        }, 100);*/
 
         //$('#output').text(x_val);
         //console.log(x_val, y_val);
